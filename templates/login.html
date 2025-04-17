@@ -20,16 +20,16 @@
             <form action="{{ url_for('auth.login') }}" method="POST">
                 <div class="mb-3">
                     <label for="username" class="form-label">Username</label>
-                    <input type="text" class="form-control" id="username" name="username" placeholder="Enter your username" required>
+                    <input type="text" class="form-control" id="username" name="username" placeholder="entre com seu username" required>
                 </div>
                 <div class="mb-3">
                     <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" required>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="entre com sua password" required>
                 </div>
-                <button type="submit" class="btn btn-primary w-100">Login</button>
+                <button type="submit" class="btn btn-primary w-100">Acessar</button>
             </form>
             <div class="text-center mt-3">
-                <a href="{{ url_for('auth.register') }}">Don't have an account? Register here</a>
+                <a href="#">Entre em contato com um admin para se registrar.</a>
             </div>
         </div>
     </div>
