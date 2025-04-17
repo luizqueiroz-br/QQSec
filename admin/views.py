@@ -11,7 +11,7 @@ def admin_area():
     if current_user.role != 'admin':
         return render_template('acesso_negado.html')
     if request.headers.get('HX-Request'):
-        return render_template('admin/registro.html')
+        return render_template('admin/main.html')
     return render_template('erro.html')
 
 @views_admin_bp.route('/users')
