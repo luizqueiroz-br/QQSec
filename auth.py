@@ -66,6 +66,7 @@ def register():
             username=username,
             email=email,
             password=generate_password_hash(password),
+            by=current_user.username,
             role=role
         )
         db.session.add(novo_user)

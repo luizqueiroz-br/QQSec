@@ -29,6 +29,8 @@ app.register_blueprint(views_admin_bp)
 def create_tables():
     with app.app_context():
         db.create_all()
+        User.create_admin_user()
+        
 
 if __name__ == '__main__':
     create_tables()

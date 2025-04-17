@@ -1,5 +1,6 @@
 from database import db
 from flask_login import UserMixin
+from werkzeug.security import check_password_hash, generate_password_hash
 
 # Define the User model
 class User(UserMixin, db.Model):
@@ -7,6 +8,7 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(150), unique=True, nullable=False)
     email = db.Column(db.String(150), unique=True, nullable=False)
     password = db.Column(db.String(150), nullable=False)
+    by = db.Column(db.String(150), nullable=False)
     role = db.Column(db.String(50), nullable=False)
 
     @staticmethod
@@ -46,12 +48,14 @@ class User(UserMixin, db.Model):
             admin_user = User(
                 username='admin',
                 email='admin@admin.com',
-                password='admin',
-                role='admin'
+                password=generate_password_hash('admin'),
+                role='admin',
+                by='system'
             )
             db.session.add(admin_user)
             db.session.commit()
     
+
 
 # Define the NmapScan model
 class NmapScan(db.Model):
