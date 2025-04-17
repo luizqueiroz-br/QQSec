@@ -1,12 +1,17 @@
-# Sistema de Autenticação Flask
+# Sistema de Autenticação e Gerenciamento Flask
 
-Este é um sistema de autenticação web desenvolvido com Flask, oferecendo funcionalidades de registro de usuários, login e controle de acesso baseado em roles.
+Este é um sistema web desenvolvido com Flask que oferece funcionalidades de autenticação, gerenciamento de usuários e recursos de escaneamento de rede usando NMAP.
 
 ## Funcionalidades
 
 - Sistema de autenticação completo (login/registro)
 - Controle de acesso baseado em roles (admin/comum)
-- Interface web com templates HTML
+- Interface web responsiva com templates HTML
+- Painel administrativo para gerenciamento de usuários
+- Funcionalidades de escaneamento NMAP
+  - Realização de novos scans
+  - Visualização detalhada de resultados
+  - Histórico de scans recentes
 - Validação de dados do usuário
 - Banco de dados SQLite para armazenamento
 - Proteção de senhas com hash
@@ -21,6 +26,7 @@ flask_login
 werkzeug
 flask-wtf
 python-dotenv
+python-nmap
 ```
 
 ## Instalação
@@ -69,10 +75,27 @@ python app.py
 ├── extensions.py      # Extensões Flask
 ├── models.py          # Modelos do banco de dados
 ├── views.py           # Rotas da aplicação
+├── admin/            # Módulo administrativo
+│   └── views.py      # Rotas administrativas
+├── nmap/             # Módulo de escaneamento
 ├── requirements.txt   # Dependências do projeto
-├── templates/         # Templates HTML
+├── static/           # Arquivos estáticos
+├── templates/        # Templates HTML
+│   ├── admin/       # Templates administrativos
+│   │   ├── main.html
+│   │   ├── registro.html
+│   │   └── usuarios.html
+│   ├── includes/    # Componentes reutilizáveis
+│   │   ├── header.html
+│   │   └── sidebar.html
+│   ├── partials/    # Componentes parciais
+│   │   ├── dashboard_main.html
+│   │   └── nmap/    # Templates NMAP
+│   │       ├── detalhe_scan.html
+│   │       ├── new_scan.html
+│   │       └── recente_scans.html
+│   ├── base.html
 │   ├── login.html
-│   ├── registro.html
 │   ├── dashboard.html
 │   ├── erro.html
 │   └── acesso_negado.html
@@ -86,6 +109,12 @@ python app.py
 - `/register` - Página de registro
 - `/dashboard` - Página principal (requer autenticação)
 - `/admin` - Área administrativa (requer role admin)
+  - `/admin/usuarios` - Gerenciamento de usuários
+  - `/admin/registro` - Registro de novos usuários pelo admin
+- `/nmap` - Funcionalidades de scan
+  - `/nmap/new` - Novo escaneamento
+  - `/nmap/detalhe/<id>` - Detalhes do scan
+  - `/nmap/recentes` - Histórico de scans
 - `/logout` - Rota para sair do sistema
 
 ## Segurança
@@ -95,7 +124,14 @@ python app.py
 - Validação de dados do usuário
 - Controle de acesso baseado em roles
 - Sessões seguras com Flask-Login
+- Validação de permissões para operações NMAP
 
 ## Desenvolvimento
 
 O projeto usa SQLite como banco de dados para desenvolvimento. Para ambiente de produção, recomenda-se migrar para um banco de dados mais robusto como PostgreSQL.
+
+## Requisitos do Sistema
+
+- Python 3.8+
+- NMAP instalado no sistema
+- Permissões adequadas para execução de scans NMAP
