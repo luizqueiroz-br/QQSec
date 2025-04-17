@@ -20,19 +20,17 @@ def dashboard_main():
         return render_template('partials/dashboard_main.html')
     return render_template('dashboard.html')
 
-@views_bp.route('/orders')
+@views_bp.route('/nmap')
 @login_required
-def orders():
-    if request.headers.get('HX-Request'):
-        return render_template('partials/orders.html')
-    return render_template('dashboard.html')
-
-@views_bp.route('/nmap/recentes')
-@login_required
-def products():
+def nmap_all():
     if request.headers.get('HX-Request'):
         return render_template('partials/nmap/recente_scans.html')
     return render_template('dashboard.html')
+
+@views_bp.route('/nmap/new')
+@login_required
+def nmap_new():
+    return render_template('partials/nmap/new_scan.html')
 
 @views_bp.route('/customers')
 @login_required
@@ -71,7 +69,7 @@ def users():
     if current_user.role != 'admin':
         return render_template('acesso_negado.html')
     if request.headers.get('HX-Request'):
-        return render_template('partials/users.html')
+        return render_template('admin/usuarios.html')
     return render_template('dashboard.html')
 
 @views_bp.route('/settings')
