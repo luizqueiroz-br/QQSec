@@ -3,6 +3,11 @@ from flask_login import login_required, current_user
 from time import sleep
 views_bp = Blueprint('views', __name__)
 
+
+@views_bp.route('/')
+def index():
+    return render_template('login.html')
+
 @views_bp.route('/dashboard')
 @login_required
 def dashboard():
