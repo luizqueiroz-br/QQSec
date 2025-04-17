@@ -55,6 +55,13 @@ SECRET_KEY=sua-chave-secreta-aqui
 python app.py
 ```
 
+> **Nota**: Ao inicializar o banco de dados, um usuário admin será automaticamente criado com as seguintes credenciais:
+> - Username: admin
+> - Email: admin@admin.com
+> - Password: admin
+> 
+> Recomenda-se alterar a senha do admin após o primeiro login.
+
 ## Uso
 
 1. Inicie o servidor:
