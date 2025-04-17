@@ -142,3 +142,8 @@ O projeto usa SQLite como banco de dados para desenvolvimento. Para ambiente de 
 - Python 3.8+
 - NMAP instalado no sistema
 - Permissões adequadas para execução de scans NMAP
+
+
+## MVP da versão 1.0
+- Gerenciamento de usuário, cadastro e sessão.
+- Scan do nmap usando interface, (novo scan, listar scans, detalhe de um scan)
