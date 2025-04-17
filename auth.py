@@ -73,4 +73,4 @@ def register():
         flash('Usuário registrado com sucesso! Faça login.')
         return redirect(url_for('auth.login'))
 
-    return render_template('registro.html')
+    return render_template('admin/registro.html')
