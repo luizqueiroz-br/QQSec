@@ -19,7 +19,6 @@ login_manager.init_app(app)
 from auth import auth_bp
 from views import views_bp
 
-
 app.register_blueprint(auth_bp)
 app.register_blueprint(views_bp)
 

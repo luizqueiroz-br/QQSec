@@ -4,6 +4,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from models import User
 from database import db
 from extensions import login_manager
+from flask_login import login_required, current_user
 
 
 
@@ -15,6 +16,8 @@ def load_user(user_id):
 
 @auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
+    if current_user.is_authenticated:
+        return redirect(url_for('views.dashboard'))
     if request.method == 'POST':
         user = User.query.filter_by(username=request.form['username']).first()
         if user and check_password_hash(user.password, request.form['password']):
@@ -30,7 +33,10 @@ def logout():
     return redirect(url_for('auth.login'))
 
 @auth_bp.route('/register', methods=['GET', 'POST'])
+@login_required
 def register():
+    if current_user.role != 'admin':
+        return render_template('acesso_negado.html')
     if request.method == 'POST':
         username = request.form['username']
         email = request.form['email']
