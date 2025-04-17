@@ -18,9 +18,12 @@ login_manager.init_app(app)
 
 from auth import auth_bp
 from views import views_bp
+from admin.views import views_admin_bp
 
 app.register_blueprint(auth_bp)
 app.register_blueprint(views_bp)
+app.register_blueprint(views_admin_bp)
+
 
 
 def create_tables():

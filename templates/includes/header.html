@@ -14,7 +14,7 @@
                 </li>
                 {% if current_user.role == 'admin' %}
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('views.admin_area') }}" data-page>Admin</a>
+                    <a class="nav-link" href="{{ url_for('views_admin.admin_area') }}" data-page>Admin</a>
                 </li>
                 {% endif %}
    
