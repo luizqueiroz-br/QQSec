@@ -1,9 +1,9 @@
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h1 class="h2">Produtos</h1>
+    <h1 class="h2">Scans Recentes</h1>
     <div class="btn-toolbar mb-2 mb-md-0">
         <button type="button" class="btn btn-sm btn-outline-primary">
             <i class="bi bi-plus"></i>
-            Novo Produto
+            Novo Scan
         </button>
     </div>
 </div>
@@ -15,9 +15,9 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Nome</th>
-                        <th>Preço</th>
-                        <th>Estoque</th>
+                        <th>IP</th>
+                        <th>Portas Abertas</th>
+                        <th>Data do Scan</th>
                         <th>Status</th>
                         <th>Ações</th>
                     </tr>
@@ -25,13 +25,13 @@
                 <tbody>
                     <tr>
                         <td>#001</td>
-                        <td>Produto A</td>
-                        <td>R$ 99,90</td>
-                        <td>15</td>
-                        <td><span class="badge bg-success">Ativo</span></td>
+                        <td>192.168.0.1</td>
+                        <td>22, 80, 443</td>
+                        <td>2023-03-01</td>
+                        <td><span class="badge bg-success">Concluído</span></td>
                         <td>
                             <button class="btn btn-sm btn-outline-primary">
-                                <i class="bi bi-pencil"></i>
+                                <i class="bi bi-eye"></i>
                             </button>
                             <button class="btn btn-sm btn-outline-danger">
                                 <i class="bi bi-trash"></i>
@@ -40,13 +40,13 @@
                     </tr>
                     <tr>
                         <td>#002</td>
-                        <td>Produto B</td>
-                        <td>R$ 159,90</td>
-                        <td>8</td>
-                        <td><span class="badge bg-success">Ativo</span></td>
+                        <td>10.0.0.2</td>
+                        <td>21, 25</td>
+                        <td>2023-03-02</td>
+                        <td><span class="badge bg-warning">Em Progresso</span></td>
                         <td>
                             <button class="btn btn-sm btn-outline-primary">
-                                <i class="bi bi-pencil"></i>
+                                <i class="bi bi-eye"></i>
                             </button>
                             <button class="btn btn-sm btn-outline-danger">
                                 <i class="bi bi-trash"></i>
@@ -55,13 +55,13 @@
                     </tr>
                     <tr>
                         <td>#003</td>
-                        <td>Produto C</td>
-                        <td>R$ 79,90</td>
-                        <td>0</td>
-                        <td><span class="badge bg-danger">Sem Estoque</span></td>
+                        <td>172.16.0.3</td>
+                        <td>3306</td>
+                        <td>2023-03-03</td>
+                        <td><span class="badge bg-danger">Falhou</span></td>
                         <td>
                             <button class="btn btn-sm btn-outline-primary">
-                                <i class="bi bi-pencil"></i>
+                            <a href=""  >  <i class="bi bi-eye"></i> </a>
                             </button>
                             <button class="btn btn-sm btn-outline-danger">
                                 <i class="bi bi-trash"></i>

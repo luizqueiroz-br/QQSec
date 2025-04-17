@@ -1,0 +1,9 @@
+<form action="{{ url_for('start_scan') }}" method="post">
+    <label for="ip">IP Address:</label>
+    <input type="text" id="ip" name="ip" placeholder="Enter IP address" required>
+    
+    <label for="flags">Nmap Flags:</label>
+    <input type="text" id="flags" name="flags" placeholder="Enter Nmap flags" required>
+    
+    <button type="submit">Start Scan</button>
+</form>

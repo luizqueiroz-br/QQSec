@@ -27,11 +27,11 @@ def orders():
         return render_template('partials/orders.html')
     return render_template('dashboard.html')
 
-@views_bp.route('/products')
+@views_bp.route('/nmap/recentes')
 @login_required
 def products():
     if request.headers.get('HX-Request'):
-        return render_template('partials/products.html')
+        return render_template('partials/nmap/recente_scans.html')
     return render_template('dashboard.html')
 
 @views_bp.route('/customers')

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Usuários</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        button {
+            margin: 0 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        .btn-activate {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+        }
+        .btn-deactivate {
+            background-color: #f44336;
+            color: white;
+            border: none;
+        }
+        .btn-edit {
+            background-color: #008CBA;
+            color: white;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Lista de Usuários</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Status</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Exemplo de linha de usuário -->
+            <tr>
+                <td>1</td>
+                <td>João Silva</td>
+                <td>joao.silva@example.com</td>
+                <td>Ativo</td>
+                <td>
+                    <button class="btn-deactivate">Desativar</button>
+                    <button class="btn-edit">Alterar Dados</button>
+                </td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Maria Oliveira</td>
+                <td>maria.oliveira@example.com</td>
+                <td>Inativo</td>
+                <td>
+                    <button class="btn-activate">Ativar</button>
+                    <button class="btn-edit">Alterar Dados</button>
+                </td>
+            </tr>
+            <!-- Adicione mais usuários aqui -->
+        </tbody>
+    </table>
+</body>
+</html>
