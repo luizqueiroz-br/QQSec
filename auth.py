@@ -16,14 +16,19 @@ def load_user(user_id):
 
 @auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
+
     if current_user.is_authenticated:
         return redirect(url_for('views.dashboard'))
     if request.method == 'POST':
         user = User.query.filter_by(username=request.form['username']).first()
         if user and check_password_hash(user.password, request.form['password']):
-            login_user(user)
-            return redirect(url_for('views.dashboard'))
-        flash('Ops, parece que algo não esta correto!')
+            if not user.is_active:
+                flash('Usuário inativo, entre em contato com um adminstrador!')
+                return redirect(url_for('auth.login'))
+            else:
+                login_user(user)
+                return redirect(url_for('views.dashboard'))
+        flash('Ops, parece que algo não esta correto com os dados de acesso!')
         return redirect(url_for('auth.login'))
     return render_template('login.html')
 

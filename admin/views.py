@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, abort, request
+from flask import Blueprint, render_template, abort, request, flash, redirect, url_for
 from flask_login import login_required, current_user
 from time import sleep
 from models import User
@@ -23,6 +23,17 @@ def users():
     if request.headers.get('HX-Request'):
         return render_template('admin/usuarios.html', lista_usuarios=User.get_all_users())
     return render_template('dashboard.html')
+
+@views_admin_bp.route('/users/<int:user_id>/toggle')
+@login_required
+def toggle_user_status(user_id):
+    if current_user.role != 'admin':
+        return render_template('acesso_negado.html')
+    user = User.toggle_active_status(user_id)
+    if user:
+        flash('Status do usuário foi alterado!')
+        return redirect(url_for('views_admin.users'))
+    return abort(404)
 
 @views_admin_bp.route('/settings')
 @login_required

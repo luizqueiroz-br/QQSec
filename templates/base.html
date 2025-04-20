@@ -33,6 +33,16 @@
 
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                 <div id="content-area">
+                    <div class="container">
+                        {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                        {% for message in messages %}
+                        <div style="color: red; margin-bottom: 10px;">{{ message }}</div>
+                        {% endfor %}
+                        {% endif %}
+                        {% endwith %}
+                    
+                    </div>
                     {% block content %}{% endblock %}
                 </div>
             </main>

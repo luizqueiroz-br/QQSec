@@ -1,85 +1,104 @@
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
 
+    th,
+    td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
 
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-        th {
-            background-color: #f4f4f4;
-        }
-        button {
-            margin: 0 5px;
-            padding: 5px 10px;
-            cursor: pointer;
-        }
-        .btn-activate {
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-        }
-        .btn-deactivate {
-            background-color: #f44336;
-            color: white;
-            border: none;
-        }
-        .btn-edit {
-            background-color: #008CBA;
-            color: white;
-            border: none;
-        }
-    </style>
+    th {
+        background-color: #f4f4f4;
+    }
 
-    <h1>Lista de Usuários</h1>
+    button {
+        margin: 0 5px;
+        padding: 5px 10px;
+        cursor: pointer;
+    }
 
-    <div class="btn-toolbar mb-2 mb-md-0">
-        <a href="{{ url_for('auth.register') }}" class="btn btn-sm btn-outline-secondary">
-            <i class="bi bi-cart"></i>
-            Novo Usuário
-        </a>
+    .btn-activate {
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+    }
+
+    .btn-deactivate {
+        background-color: #f44336;
+        color: white;
+        border: none;
+    }
+
+    .btn-edit {
+        background-color: #008CBA;
+        color: white;
+        border: none;
+    }
+</style>
+
+<h1>Lista de Usuários</h1>
+
+<div class="btn-toolbar mb-2 mb-md-0">
+    <a href="{{ url_for('auth.register') }}" class="btn btn-sm btn-outline-secondary">
+        <i class="bi bi-cart"></i>
+        Novo Usuário
+    </a>
 
 
 </div>
 
+<div class="container">
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    <div style="color: red; margin-bottom: 10px;">{{ message }}</div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
 
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nome</th>
-                <th>Email</th>
-                <th>Role</th>
-                <th>Status</th>
-                <th>Ações</th>
-                <th>By</th>
-            </tr>
-        </thead>
-        <tbody>
-            
-             {% for user in lista_usuarios %}
-            <tr>
-                <td>{{ user.id }}</td>
-                <td>{{ user.username }}</td>
-                <td>{{ user.email }}</td>
-                <td>{{ user.role }}</td>
-                <td>{{ 'Ativo' if user.is_active else 'Inativo' }}</td>
-                <td>
+</div>
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Status</th>
+            <th>Ações</th>
+            <th>By</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        {% for user in lista_usuarios %}
+        <tr>
+            <td>{{ user.id }}</td>
+            <td>{{ user.username }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.role }}</td>
+            <td>{{ 'Ativo' if user.is_active else 'Inativo' }}</td>
+            <td>
+                <a href="{{ url_for('views_admin.toggle_user_status', user_id=user.id) }}">
+
                     {% if user.is_active %}
-                        <button class="btn-deactivate">Desativar</button>
+                    <button class="btn-deactivate">Desativar</button>
                     {% else %}
-                        <button class="btn-activate">Ativar</button>
-                    {% endif %}
-                    <button class="btn-edit">Alterar Dados</button>
-                </td>
-                <td>{{ user.by}}</td>
+                    <button class="btn-activate">Ativar</button>
 
-            </tr>
-            {% endfor %}
-            <!-- Adicione mais usuários aqui -->
-        </tbody>
-    </table>
+                    {% endif %}
+                </a>
+                <button class="btn-edit">Alterar Dados</button>
+            </td>
+            <td>{{ user.by}}</td>
+
+        </tr>
+        {% endfor %}
+        <!-- Adicione mais usuários aqui -->
+    </tbody>
+</table>
