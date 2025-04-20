@@ -10,6 +10,7 @@ class User(UserMixin, db.Model):
     password = db.Column(db.String(150), nullable=False)
     by = db.Column(db.String(150), nullable=False)
     role = db.Column(db.String(50), nullable=False)
+    is_active = db.Column(db.Boolean, nullable=False, default=True)
 
     @staticmethod
     def get_all_users():
@@ -21,7 +22,9 @@ class User(UserMixin, db.Model):
             "id": self.id,
             "username": self.username,
             "email": self.email,
-            "role": self.role
+            "role": self.role,
+            "is_active": self.is_active,
+            "by": self.by
         }
     
     @staticmethod
@@ -56,6 +59,11 @@ class User(UserMixin, db.Model):
             db.session.commit()
     
 
+    @staticmethod
+    def get_all_users():
+        users = User.query.all()
+        return [user.to_json() for user in users]
+ 
 
 # Define the NmapScan model
 class NmapScan(db.Model):

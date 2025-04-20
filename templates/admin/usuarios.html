@@ -53,32 +53,33 @@
                 <th>ID</th>
                 <th>Nome</th>
                 <th>Email</th>
+                <th>Role</th>
                 <th>Status</th>
                 <th>Ações</th>
+                <th>By</th>
             </tr>
         </thead>
         <tbody>
-            <!-- Exemplo de linha de usuário -->
+            
+             {% for user in lista_usuarios %}
             <tr>
-                <td>1</td>
-                <td>João Silva</td>
-                <td>joao.silva@example.com</td>
-                <td>Ativo</td>
+                <td>{{ user.id }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.role }}</td>
+                <td>{{ 'Ativo' if user.is_active else 'Inativo' }}</td>
                 <td>
-                    <button class="btn-deactivate">Desativar</button>
+                    {% if user.is_active %}
+                        <button class="btn-deactivate">Desativar</button>
+                    {% else %}
+                        <button class="btn-activate">Ativar</button>
+                    {% endif %}
                     <button class="btn-edit">Alterar Dados</button>
                 </td>
+                <td>{{ user.by}}</td>
+
             </tr>
-            <tr>
-                <td>2</td>
-                <td>Maria Oliveira</td>
-                <td>maria.oliveira@example.com</td>
-                <td>Inativo</td>
-                <td>
-                    <button class="btn-activate">Ativar</button>
-                    <button class="btn-edit">Alterar Dados</button>
-                </td>
-            </tr>
+            {% endfor %}
             <!-- Adicione mais usuários aqui -->
         </tbody>
     </table>

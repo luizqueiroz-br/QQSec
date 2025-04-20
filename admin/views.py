@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, abort, request
 from flask_login import login_required, current_user
 from time import sleep
+from models import User
 views_admin_bp = Blueprint('views_admin', __name__)
 
 
@@ -20,7 +21,7 @@ def users():
     if current_user.role != 'admin':
         return render_template('acesso_negado.html')
     if request.headers.get('HX-Request'):
-        return render_template('admin/usuarios.html')
+        return render_template('admin/usuarios.html', lista_usuarios=User.get_all_users())
     return render_template('dashboard.html')
 
 @views_admin_bp.route('/settings')
