@@ -38,14 +38,11 @@
     <h1>Lista de Usuários</h1>
 
     <div class="btn-toolbar mb-2 mb-md-0">
-        <a href="#" data-bs-toggle="modal" data-bs-target="#newUserModal">
+        <a href="{{ url_for('auth.register') }}" class="btn btn-sm btn-outline-secondary">
             <i class="bi bi-cart"></i>
-            Nova busca
+            Novo Usuário
         </a>
 
-        <!-- Modal -->
-  
-                        {% include 'admin/registro.html' %}
 
 </div>
 

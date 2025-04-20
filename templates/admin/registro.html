@@ -1,15 +1,11 @@
 
+{% extends "base.html" %}
+
+{% block title %}Registro de Usuário{% endblock %}
 
 
 
-<div class="modal fade" id="newUserModal" tabindex="-1" aria-labelledby="newUserModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="newUserModalLabel">Novo User</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
+{% block content %}
 
                 <div class="container">
                     <h1>Registro de Usuário</h1>
@@ -48,10 +44,7 @@
                     </form>
 
 </div>
-<div class="modal-footer">
-    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-</div>
-</div>
-</div>
-</div>
-</div>
+
+
+
+{% endblock %}
