@@ -10,7 +10,8 @@ def index():
 @views_bp.route('/dashboard')
 @login_required
 def dashboard():
-    return render_template('dashboard.html')
+    ip_address = request.remote_addr
+    return render_template('dashboard.html', ip_address=ip_address)
 
 @views_bp.route('/dashboard/main')
 @login_required
