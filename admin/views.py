@@ -35,6 +35,9 @@ def toggle_user_status(user_id):
         return redirect(url_for('views_admin.users'))
     return abort(404)
 
+
+# criar update de senha
+
 @views_admin_bp.route('/settings')
 @login_required
 def settings():
