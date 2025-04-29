@@ -1,18 +1,30 @@
-import './App.css'
-import 'bootstrap/dist/css/bootstrap.min.css'
-import { Login } from './componentes/login'
-function App() {
-  return (
-    <>
-      <div className="container">
-        <div className="row">
-          <div className="col">
-            <Login></Login>
-          </div>
-        </div>
-      </div>
-    </>
-  )
-}
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
-export default App
+import Login from './components/pages/Login';
+import Dashboard from './components/pages/Dashboard';
+import PrivateRoute from './components/PrivateRoute';
+
+export default function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    fetch('http://localhost:5000/verify-login', {
+      credentials: 'include',
+    })
+      .then((res) => res.json())
+      .then((data) => setIsAuthenticated(data.logged_in))
+      .catch(() => setIsAuthenticated(false));
+  }, []);
+
+  return (
+    <Router>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route element={<PrivateRoute isAuthenticated={isAuthenticated} />}>
+          <Route path="/dashboard" element={<Dashboard />} />
+        </Route>
+      </Routes>
+    </Router>
+  );
+}

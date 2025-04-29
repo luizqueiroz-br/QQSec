@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash
+from flask import Blueprint, render_template, request, redirect, url_for, flash,jsonify
 from flask_login import login_user, logout_user
 from werkzeug.security import check_password_hash, generate_password_hash
 from models import User
@@ -16,21 +16,38 @@ def load_user(user_id):
 
 @auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
-
+    """
+    Esta função lida com o login do usuário. Se o usuário já estiver autenticado, ele será redirecionado para o dashboard(frontend).
+    Caso contrário, ele pode fazer login com seu nome de usuário e senha. Se o login for bem-sucedido,
+    o usuário será redirecionado para o dashboard. Caso contrário, uma mensagem de erro será exibida.
+    """
+    data = request.form
+    username = data.get('username')
+    password = data.get('password')
     if current_user.is_authenticated:
         return redirect(url_for('views.dashboard'))
     if request.method == 'POST':
-        user = User.query.filter_by(username=request.form['username']).first()
-        if user and check_password_hash(user.password, request.form['password']):
+        user = User.query.filter_by(username=username).first()
+        if user and check_password_hash(user.password, password):
             if not user.is_active:
-                flash('Usuário inativo, entre em contato com um adminstrador!')
-                return redirect(url_for('auth.login'))
+               
+                return jsonify({'message': 'hnn, perai vi aqui que seu user esta inativo em ...'}), 401
             else:
                 login_user(user)
-                return redirect(url_for('views.dashboard'))
+                return jsonify({'message': 'Login ok'}), 200
         flash('Ops, parece que algo não esta correto com os dados de acesso!')
-        return redirect(url_for('auth.login'))
-    return render_template('login.html')
+        return jsonify({'message': 'hnn, perai vi aqui que seu user esta inativo em ...'}), 401
+    return jsonify({'message': 'você precisa se logar novamente ein ....'}), 401
+
+
+@auth_bp.route('/verify-login')
+def verify_login():
+    if current_user.is_authenticated:
+        return jsonify({'logged_in': True})
+    return jsonify({'logged_in': False}), 401
+
+
+
 
 @auth_bp.route('/logout')
 def logout():
