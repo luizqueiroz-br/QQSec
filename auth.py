@@ -25,7 +25,7 @@ def login():
     username = data.get('username')
     password = data.get('password')
     if current_user.is_authenticated:
-        return redirect(url_for('views.dashboard'))
+        return jsonify({'message': 'Login ok'}), 200
     if request.method == 'POST':
         user = User.query.filter_by(username=username).first()
         if user and check_password_hash(user.password, password):
@@ -35,7 +35,6 @@ def login():
             else:
                 login_user(user)
                 return jsonify({'message': 'Login ok'}), 200
-        flash('Ops, parece que algo não esta correto com os dados de acesso!')
         return jsonify({'message': 'hnn, perai vi aqui que seu user esta inativo em ...'}), 401
     return jsonify({'message': 'você precisa se logar novamente ein ....'}), 401
 

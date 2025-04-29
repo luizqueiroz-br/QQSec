@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 const Login = () => {
     // Suporte ao TypeScript pode ser ajustado com tipagem, mas aqui mantemos JS puro
-    const [email, setEmail] = useState('');
+    const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [message, setMessage] = useState(''); // Usado para exibir mensagens de erro ou sucesso
 
@@ -10,24 +10,25 @@ const Login = () => {
         e.preventDefault();
 
         try {
-            const response = await fetch('http://localhost:5000/login', {
+            const response = await fetch('http://127.0.0.1:5000/login', {
                 method: 'POST',
                 credentials: 'include',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
                 },
-                body: new URLSearchParams({ email, password }),
+                body: new URLSearchParams({ username, password }),
             });
 
             const data = await response.json();
-
-            if (response.ok) {
+            console.log(data);
+            if (response.status === 200) {
+                setMessage('Login successful');
                 window.location.href = '/dashboard';
             } else {
                 setMessage(data.message);
             }
         } catch (error) {
-            setMessage('Erro de conexão com o servidor.');
+            setMessage('api error ' + error.message);
         }
     };
 
@@ -46,8 +47,8 @@ const Login = () => {
                   type="text"
                   id="username"
                   className="form-control"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
                   placeholder="Enter your username"
                   required
                 />

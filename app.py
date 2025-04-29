@@ -1,6 +1,7 @@
 from flask import Flask
 import os
 from dotenv import load_dotenv
+from flask_cors import CORS
 from database import db
 from models import User
 from extensions import login_manager
@@ -11,6 +12,9 @@ load_dotenv()
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'chave-desenvolvimento-temporaria')
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db_local.db'
+
+# Enable CORS
+CORS(app, origins=['http://localhost:5173'], supports_credentials=True)
 
 # Inicializa as extensões
 db.init_app(app)
@@ -23,7 +27,6 @@ from admin.views import views_admin_bp
 app.register_blueprint(auth_bp)
 app.register_blueprint(views_bp)
 app.register_blueprint(views_admin_bp)
-
 
 
 def create_tables():
