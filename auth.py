@@ -26,8 +26,6 @@ def login():
     password = data.get('password')
     if current_user.is_authenticated:
         user = User.query.filter_by(username=username).first()
-        login_user(user)
-        print('Login realizado com sucesso!')
         return jsonify({'message': 'Login ok'}), 200
     if request.method == 'POST':
         user = User.query.filter_by(username=username).first()

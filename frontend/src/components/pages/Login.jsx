@@ -27,6 +27,8 @@ const Login = () => {
                 setMessage('Login successful');
                 navigate('/dashboard'); // <-- Usa o hook correto aqui!            } else {
                 setMessage(data.message);
+            } else if (response.status === 401) {
+                setMessage(data.message);
             }
         } catch (error) {
             setMessage('api error ' + error.message);
@@ -75,9 +77,10 @@ const Login = () => {
         <button type="submit" className="btn btn-primary w-100">Login</button>
         </form>
         {message && (
-        <div className={`alert ${message === 'Login successful' ? 'alert-success' : 'alert-danger'} text-center mt-3`} role="alert">
-          {message}
+        <div className="alert alert-danger text-center mt-3" role="alert">
+          {message} 
         </div>
+      
         )}
       </div>
       </div>

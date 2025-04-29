@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
 import Login from './components/pages/Login';
@@ -20,11 +20,20 @@ export default function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route element={<PrivateRoute isAuthenticated={isAuthenticated} />}>
+      <Route
+        path="/login"
+        element={
+        isAuthenticated ? (
+          <Navigate to="/dashboard" replace />
+        ) : (
+          <Login />
+        )
+        }
+      />
+      <Route element={<PrivateRoute isAuthenticated={isAuthenticated} />}>
         <Route path="/" element={<Dashboard />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-        </Route>
+        <Route path="/dashboard" element={<Dashboard />} />
+      </Route>
       </Routes>
     </Router>
   );
