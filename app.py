@@ -15,7 +15,8 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db_local.db'
 
 # Enable CORS
 CORS(app, origins=['http://localhost:5173'], supports_credentials=True)
-
+app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'
+app.config['SESSION_COOKIE_SECURE'] = False
 # Inicializa as extensões
 db.init_app(app)
 login_manager.init_app(app)
@@ -37,4 +38,4 @@ def create_tables():
 
 if __name__ == '__main__':
     create_tables()
-    app.run(debug=False, port=5000)
+    app.run(host='localhost', debug=True, port=5000)

@@ -25,24 +25,28 @@ def login():
     username = data.get('username')
     password = data.get('password')
     if current_user.is_authenticated:
+        user = User.query.filter_by(username=username).first()
+        login_user(user)
+        print('Login realizado com sucesso!')
         return jsonify({'message': 'Login ok'}), 200
     if request.method == 'POST':
         user = User.query.filter_by(username=username).first()
         if user and check_password_hash(user.password, password):
             if not user.is_active:
-               
+                
                 return jsonify({'message': 'hnn, perai vi aqui que seu user esta inativo em ...'}), 401
             else:
                 login_user(user)
+                print('Login realizado com sucesso new!')
                 return jsonify({'message': 'Login ok'}), 200
-        return jsonify({'message': 'hnn, perai vi aqui que seu user esta inativo em ...'}), 401
+        return jsonify({'message': 'hnn me parece que algo não esta correto revisa suas informações...'}), 401
     return jsonify({'message': 'você precisa se logar novamente ein ....'}), 401
 
 
 @auth_bp.route('/verify-login')
 def verify_login():
     if current_user.is_authenticated:
-        return jsonify({'logged_in': True})
+        return jsonify({'logged_in': True}), 200
     return jsonify({'logged_in': False}), 401
 
 

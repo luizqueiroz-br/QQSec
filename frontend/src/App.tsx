@@ -9,7 +9,7 @@ export default function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
-    fetch('http://127.0.0.1:5000/verify-login', {
+    fetch('http://localhost:5000/verify-login', {
       credentials: 'include',
     })
       .then((res) => res.json())
@@ -22,6 +22,7 @@ export default function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route element={<PrivateRoute isAuthenticated={isAuthenticated} />}>
+        <Route path="/" element={<Dashboard />} />
           <Route path="/dashboard" element={<Dashboard />} />
         </Route>
       </Routes>
