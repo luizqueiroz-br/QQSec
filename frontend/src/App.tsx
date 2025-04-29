@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import Login from './components/pages/Login';
 import Dashboard from './components/pages/Dashboard';
 import PrivateRoute from './components/PrivateRoute';
+import DashboardRedirect from './components/DashboardRedirect.jsx';
 
 export default function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -23,16 +24,17 @@ export default function App() {
       <Route
         path="/login"
         element={
-        isAuthenticated ? (
-          <Navigate to="/dashboard" replace />
-        ) : (
-          <Login />
-        )
+          isAuthenticated ? (
+            <Navigate to="/" replace />
+          ) : (
+            <Login setIsAuthenticated={setIsAuthenticated}/>
+          )
         }
       />
       <Route element={<PrivateRoute isAuthenticated={isAuthenticated} />}>
         <Route path="/" element={<Dashboard />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/redirect" element={<DashboardRedirect isAuthenticated={isAuthenticated} />} />
       </Route>
       </Routes>
     </Router>

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Dashboard from './Dashboard';
 
-const Login = () => {
+const Login = ({ setIsAuthenticated }) => {
     // Suporte ao TypeScript pode ser ajustado com tipagem, mas aqui mantemos JS puro
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -22,11 +22,15 @@ const Login = () => {
             });
 
             const data = await response.json();
-            console.log(data);
+            console.log('data:', data);
+            console.log('response.status:', response.status);
             if (response.status === 200) {
-                setMessage('Login successful');
-                navigate('/dashboard'); // <-- Usa o hook correto aqui!            } else {
+                console.log('Login successful teoricamente');
                 setMessage(data.message);
+                console.log('Before navigate');
+                //navigate('/dashboard'); // <-- Usa o hook correto aqui!
+                setIsAuthenticated(true); //Chamar setIsAuthenticated após o login bem-sucedido
+                navigate('/redirect');
             } else if (response.status === 401) {
                 setMessage(data.message);
             }
