@@ -5,7 +5,7 @@ import Login from './components/pages/Login';
 import Dashboard from './components/pages/Dashboard';
 import PrivateRoute from './components/PrivateRoute';
 import DashboardRedirect from './components/DashboardRedirect.jsx';
-
+import DashboardLayout from './components/layouts/DashboardLayout';
 export default function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
@@ -32,9 +32,11 @@ export default function App() {
         }
       />
       <Route element={<PrivateRoute isAuthenticated={isAuthenticated} />}>
-        <Route path="/" element={<Dashboard />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/redirect" element={<DashboardRedirect isAuthenticated={isAuthenticated} />} />
+        <Route element={<DashboardLayout />}>
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/redirect" element={<DashboardRedirect isAuthenticated={isAuthenticated} />} />
+        </Route>
       </Route>
       </Routes>
     </Router>

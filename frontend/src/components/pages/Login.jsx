@@ -11,6 +11,21 @@ const Login = ({ setIsAuthenticated }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        if (!username || !password) {
+            setMessage('Por favor, preencha todos os campos.');
+            return;
+        }
+
+        if (username.length < 3 || username.length > 20) {
+            setMessage('O nome de usuário deve ter entre 3 e 20 caracteres.');
+            return;
+        }
+
+        if (password.length < 6) {
+            setMessage('A senha deve ter pelo menos 6 caracteres.');
+            return;
+        }
+
         try {
             const response = await fetch('http://localhost:5000/login', {
                 method: 'POST',

@@ -1,18 +1,19 @@
-import React from 'react';
+import CardMetric from "../basicos/CardMetric";
 
 export default function Dashboard() {
   return (
-    <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
-      <h1>Bem-vindo ao Dashboard!</h1>
-      <div style={{ display: 'flex', gap: '20px', marginTop: '20px' }}>
-        <div style={{ flex: 1, padding: '20px', border: '1px solid #ccc', borderRadius: '8px' }}>
-          <h2>Seção 1</h2>
-          <p>Informações ou gráficos podem ser exibidos aqui.</p>
-        </div>
-        <div style={{ flex: 1, padding: '20px', border: '1px solid #ccc', borderRadius: '8px' }}>
-          <h2>Seção 2</h2>
-          <p>Mais informações ou widgets podem ser exibidos aqui.</p>
-        </div>
+    <div className="row">
+      <div className="col-md-3">
+        <CardMetric title="Sales" value="3450" growth="+25%" />
+      </div>
+      <div className="col-md-3">
+        <CardMetric title="Revenue" value="$35,256" growth="+15%" />
+      </div>
+      <div className="col-md-3">
+        <CardMetric title="Avg. Price" value="$10.22" growth="-5%" />
+      </div>
+      <div className="col-md-3">
+        <CardMetric title="Operations" value="15893" growth="+8%" />
       </div>
     </div>
   );
