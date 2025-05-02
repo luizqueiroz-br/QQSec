@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Dashboard from './Dashboard';
+import { login } from '../services/authService';
 
 const Login = ({ setIsAuthenticated }) => {
     // Suporte ao TypeScript pode ser ajustado com tipagem, mas aqui mantemos JS puro
@@ -10,7 +11,6 @@ const Login = ({ setIsAuthenticated }) => {
     const navigate = useNavigate();  // <-- Aqui você cria o `navigate`
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         if (!username || !password) {
             setMessage('Por favor, preencha todos os campos.');
             return;
@@ -25,34 +25,14 @@ const Login = ({ setIsAuthenticated }) => {
             setMessage('A senha deve ter pelo menos 6 caracteres.');
             return;
         }
-
-        try {
-            const response = await fetch('http://localhost:5000/login', {
-                method: 'POST',
-                credentials: 'include',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                body: new URLSearchParams({ username, password }),
-            });
-
-            const data = await response.json();
-            console.log('data:', data);
-            console.log('response.status:', response.status);
-            if (response.status === 200) {
-                console.log('Login successful teoricamente');
-                setMessage(data.message);
-                console.log('Before navigate');
-                //navigate('/dashboard'); // <-- Usa o hook correto aqui!
-                setIsAuthenticated(true); //Chamar setIsAuthenticated após o login bem-sucedido
-                navigate('/redirect');
-            } else if (response.status === 401) {
-                setMessage(data.message);
-            }
-        } catch (error) {
-            setMessage('api error ' + error.message);
+        const sucess = await login( username, password );
+        if (sucess){
+          setIsAuthenticated(true); //Chamar setIsAuthenticated após o login bem-sucedido
+          navigate('/redirect');   
+        }else {
+          setMessage("Erro ao se auth")
         }
-    };
+ };
 
     return (
       <div className="container d-flex justify-content-center align-items-center vh-100 bg-dark">

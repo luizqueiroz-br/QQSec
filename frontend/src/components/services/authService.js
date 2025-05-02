@@ -17,7 +17,7 @@ export async function logout() {
   }
 
 
-  export async function login() {
+  export async function login(username,password) {
     try {
         const response = await fetch('http://localhost:5000/login', {
             method: 'POST',
@@ -31,12 +31,14 @@ export async function logout() {
         const data = await response.json();
 
         if (response.status === 200) {
-           // retornar true
+         
+           return true
         } else if (response.status === 401) {
-           // retornar false
+          return false
         }
     } catch (error) {
-        //console log + retornar false
+        console.log(error)
+        return false
     }
 
   }
