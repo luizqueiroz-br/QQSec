@@ -21,16 +21,10 @@ export default function App() {
   return (
     <Router>
       <Routes>
-      <Route
-        path="/login"
-        element={
-          isAuthenticated ? (
-            <Navigate to="/" replace />
-          ) : (
-            <Login setIsAuthenticated={setIsAuthenticated}/>
-          )
-        }
-      />
+<Route
+  path="/login"
+  element={<Login setIsAuthenticated={setIsAuthenticated} />}
+/>
       <Route element={<PrivateRoute isAuthenticated={isAuthenticated} />}>
         <Route element={<DashboardLayout />}>
           <Route path="/" element={<Dashboard />} />
