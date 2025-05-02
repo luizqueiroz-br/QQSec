@@ -15,3 +15,28 @@ export async function logout() {
       return false;
     }
   }
+
+
+  export async function login() {
+    try {
+        const response = await fetch('http://localhost:5000/login', {
+            method: 'POST',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: new URLSearchParams({ username, password }),
+        });
+
+        const data = await response.json();
+
+        if (response.status === 200) {
+           // retornar true
+        } else if (response.status === 401) {
+           // retornar false
+        }
+    } catch (error) {
+        //console log + retornar false
+    }
+
+  }
