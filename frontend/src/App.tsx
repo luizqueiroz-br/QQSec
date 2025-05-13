@@ -1,10 +1,10 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
 import Login from './components/pages/Login';
 import Dashboard from './components/pages/Dashboard';
 import PrivateRoute from './components/PrivateRoute';
-import DashboardRedirect from './components/DashboardRedirect.jsx';
+import DashboardRedirect from './components/DashboardRedirect';
 import DashboardLayout from './components/layouts/DashboardLayout';
 export default function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -21,10 +21,10 @@ export default function App() {
   return (
     <Router>
       <Routes>
-<Route
-  path="/login"
-  element={<Login setIsAuthenticated={setIsAuthenticated} />}
-/>
+        <Route
+          path="/login"
+          element={<Login setIsAuthenticated={setIsAuthenticated} />}
+        />
       <Route element={<PrivateRoute isAuthenticated={isAuthenticated} />}>
         <Route element={<DashboardLayout />}>
           <Route path="/" element={<Dashboard />} />

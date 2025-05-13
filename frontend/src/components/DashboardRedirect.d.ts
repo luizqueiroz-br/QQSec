@@ -1,10 +1,8 @@
-declare module './DashboardRedirect.jsx' {
-  import * as React from 'react';
-
+declare module './DashboardRedirect' {
+  import React from 'react';
   interface DashboardRedirectProps {
     isAuthenticated: boolean;
   }
-
   const DashboardRedirect: React.FC<DashboardRedirectProps>;
   export default DashboardRedirect;
 }

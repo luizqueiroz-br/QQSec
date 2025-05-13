@@ -8,7 +8,6 @@ export async function logout() {
       if (!res.ok) {
         throw new Error('Erro ao fazer logout');
       }
-      console.log('ok, te liberei')
       return true;
     } catch (err) {
       console.error('Falha na requisição de logout:', err);
