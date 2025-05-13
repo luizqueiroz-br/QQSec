@@ -3,22 +3,29 @@ import axios from 'axios';
 
 const ListarUsuarios = () => {
     const [usuarios, setUsuarios] = useState([]);
-
+    const [msgErro, setMsgErro] = useState('');
     useEffect(() => {
-        // Substitua a URL abaixo pela URL da sua API para buscar os usuários
-        axios.get('/api/usuarios')
-            .then(response => {
-                setUsuarios(response.data);
-            })
-            .catch(error => {
-                console.error('Erro ao buscar usuários:', error);
-            });
+        const fetchUsuarios = () => {
+            axios.get('/api/usuarios')
+                .then(response => {
+                    setUsuarios(response.data);
+                })
+                .catch(error => {
+                    setMsgErro('Erro ao buscar usuários:');
+                });
+        };
+
+        const timeoutId = setTimeout(fetchUsuarios, 5000);
+
+        return () => clearTimeout(timeoutId); // Limpa o timeout ao desmontar o componente
     }, []);
 
     return (
-        <div>
-            <h1>Lista de Usuários</h1>
-            {usuarios.length > 0 ? (
+        <div>                        
+        {msgErro && <p>{msgErro}</p>}
+        <h1>Lista de Usuários</h1>
+            {usuarios.length === 0 && <p>Carregando...</p>}
+            {usuarios.length < 1 ? (
                 <table>
                     <thead>
                         <tr>
@@ -30,7 +37,7 @@ const ListarUsuarios = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {usuarios.map(usuario => (
+                        {Array.isArray(usuarios) && usuarios.map(usuario => (
                             <tr key={usuario.id}>
                                 <td>{usuario.nome}</td>
                                 <td>{usuario.email}</td>
