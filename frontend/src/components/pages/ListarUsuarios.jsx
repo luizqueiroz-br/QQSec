@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import Tabelas from "../basicos/Tabelas";
+import TabelasListUser from "../basicos/Tabelas";
 import axios from 'axios';
-
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 const ListarUsuarios = () => {
     const [usuarios, setUsuarios] = useState([{"id": 1, "nome": "João", "email": ""}]);
     const [msgErro, setMsgErro] = useState('');
@@ -32,10 +33,9 @@ const ListarUsuarios = () => {
         };
 
 
-        const timeoutId = setTimeout(fetchUsuarios, 5000);
+    
 
-        return () => clearTimeout(timeoutId); // Limpa o timeout ao desmontar o componente
-
+        return fetchUsuarios();
 
     }, []);
 
@@ -52,7 +52,7 @@ const ListarUsuarios = () => {
                         <i className="bi bi-database-fill-add"></i> Novo usuário
                     </button>
                 </div>
-                <Tabelas data={usuarios}></Tabelas>
+                <TabelasListUser data={usuarios}></TabelasListUser>
             </div>
             )
         }

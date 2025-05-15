@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Tabelas = ({ data = [], additionalColumns = [] }) => {
+const TabelasListUser = ({ data = [],  }) => {
     if (!data || data.length === 0) {
         return <p>Nenhum dado disponível.</p>;
     }
@@ -17,9 +17,9 @@ const Tabelas = ({ data = [], additionalColumns = [] }) => {
                     {keys.map((key) => (
                         <th key={key}>{key}</th>
                     ))}
-                    {additionalColumns.map((col, index) => (
-                        <th key={`additional-${index}`}>{col.header}</th>
-                    ))}
+                    
+                        <th key={`additional-actions`}>Actions</th>
+                    
                 </tr>
             </thead>
             <tbody>
@@ -28,9 +28,20 @@ const Tabelas = ({ data = [], additionalColumns = [] }) => {
                         {keys.map((key) => (
                             <td key={key}>{row[key]}</td>
                         ))}
-                        {additionalColumns.map((col, index) => (
-                            <td key={`additional-${index}`}>
-                                {col.render ? col.render(row) : null}
+                        <td key={`additional-actions`}>
+                            <button className="btn btn-primary" >
+                                {row['is_active'] ? (
+                                    <i className="bi bi-toggle-off"></i>
+                                ) : (
+                                    <i className="bi bi-toggle-on"></i>
+                                )}
+                            </button>   
+                             <button className="btn btn-primary" >
+                                <i className="bi bi-pencil-square"></i>
+                            </button>
+                            <button className="btn btn-danger" >
+                                <i className="bi bi-trash"></i>     
+                            </button>
                             </td>
                         ))}
                     </tr>
@@ -41,4 +52,4 @@ const Tabelas = ({ data = [], additionalColumns = [] }) => {
     );
 };
 
-export default Tabelas;
+export default TabelasListUser;
