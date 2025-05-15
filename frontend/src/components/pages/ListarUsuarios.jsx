@@ -4,56 +4,40 @@ import axios from 'axios';
 const ListarUsuarios = () => {
     const [usuarios, setUsuarios] = useState([]);
     const [msgErro, setMsgErro] = useState('');
+    const [loading, setLoading] = useState(true);
     useEffect(() => {
         const fetchUsuarios = () => {
             axios.get('/api/usuarios')
                 .then(response => {
                     setUsuarios(response.data);
+                    setLoading(false);
                 })
                 .catch(error => {
+                    setUsuarios([]);
                     setMsgErro('Erro ao buscar usuários:');
+                    setLoading(false);
                 });
         };
+
 
         const timeoutId = setTimeout(fetchUsuarios, 5000);
 
         return () => clearTimeout(timeoutId); // Limpa o timeout ao desmontar o componente
+        console.log(usuarios.length);
+        console.log(usuarios);
+
     }, []);
 
     return (
         <div>                        
         {msgErro && <p>{msgErro}</p>}
         <h1>Lista de Usuários</h1>
-            {usuarios.length === 0 && <p>Carregando...</p>}
-            {usuarios.length < 1 ? (
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Nome</th>
-                            <th>Email</th>
-                            <th>Criado Por</th>
-                            <th>Criado Em</th>
-                            <th>Ações</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {Array.isArray(usuarios) && usuarios.map(usuario => (
-                            <tr key={usuario.id}>
-                                <td>{usuario.nome}</td>
-                                <td>{usuario.email}</td>
-                                <td>{usuario.criadoPor}</td>
-                                <td>{new Date(usuario.criadoEm).toLocaleDateString()}</td>
-                                <td>
-                                    <button onClick={() => handleEdit(usuario.id)}>Editar</button>
-                                    <button onClick={() => handleDelete(usuario.id)}>Excluir</button>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            ) : (
-                <p>Nenhum usuário cadastrado.</p>
-            )}
+        {loading ? (
+            <p>Carregando...</p>
+        ) : (
+            <p>criar um componente para tabelas</p>
+            )
+        }
         </div>
     );
 
