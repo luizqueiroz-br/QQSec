@@ -46,7 +46,14 @@ const ListarUsuarios = () => {
         {loading ? (
             <p>Carregando...</p>
         ) : (
-            <Tabelas data={usuarios}></Tabelas>
+            <div>
+                <div className="d-flex justify-content-between mb-3">
+                    <button className="btn btn-primary" >
+                        <i className="bi bi-database-fill-add"></i> Novo usuário
+                    </button>
+                </div>
+                <Tabelas data={usuarios}></Tabelas>
+            </div>
             )
         }
         </div>

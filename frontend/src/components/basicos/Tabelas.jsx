@@ -9,6 +9,8 @@ const Tabelas = ({ data = [], additionalColumns = [] }) => {
     const keys = Object.keys(data[0]);
 
     return (
+    
+       
         <table className="table table-dark table-striped">
             <thead>
                 <tr>
@@ -35,6 +37,7 @@ const Tabelas = ({ data = [], additionalColumns = [] }) => {
                 ))}
             </tbody>
         </table>
+        
     );
 };
 
