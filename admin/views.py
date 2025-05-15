@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, abort, request, flash, redirect, url_for
+from flask import Blueprint, render_template, abort, request, flash, redirect, url_for, jsonify
 from flask_login import login_required, current_user
 from time import sleep
 from models import User
@@ -9,20 +9,21 @@ views_admin_bp = Blueprint('views_admin', __name__)
 @login_required
 def admin_area():
     print(request.headers)
+    print(current_user.role)
     if current_user.role != 'admin':
         return render_template('acesso_negado.html')
     if request.headers.get('HX-Request'):
         return render_template('admin/main.html')
     return render_template('erro.html')
 
-@views_admin_bp.route('/users')
+@views_admin_bp.route('/admin/api/users')
 @login_required
 def users():
     if current_user.role != 'admin':
-        return render_template('acesso_negado.html')
-    if request.headers.get('HX-Request'):
-        return render_template('admin/usuarios.html', lista_usuarios=User.get_all_users())
-    return render_template('dashboard.html')
+        return {"error": "Acesso negado"}, 403
+    users = User.get_all_users()
+    
+    return jsonify(users), 200
 
 @views_admin_bp.route('/users/<int:user_id>/toggle')
 @login_required

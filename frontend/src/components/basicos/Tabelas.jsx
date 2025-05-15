@@ -9,7 +9,7 @@ const Tabelas = ({ data = [], additionalColumns = [] }) => {
     const keys = Object.keys(data[0]);
 
     return (
-        <table border="1" style={{ borderCollapse: 'collapse', width: '100%' }}>
+        <table className="table table-dark table-striped">
             <thead>
                 <tr>
                     {keys.map((key) => (

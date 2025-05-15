@@ -9,7 +9,9 @@ const ListarUsuarios = () => {
 
     useEffect(() => {
         const fetchUsuarios = () => {
-            axios.get('http://localhost:5000/api/usuarios')
+            axios.get('http://localhost:5000/admin/api/users', {
+                withCredentials: true
+            })
                 .then(response => {
                     console.log(response);
                     if (response.status == 200) {
@@ -24,7 +26,7 @@ const ListarUsuarios = () => {
                 })
                 .catch(error => {
                     setUsuarios([]);
-                    setMsgErro('Erro ao buscar usuários:', error.message);
+                    setMsgErro('Erro ao buscar usuários:'+ error.message);
                     setLoading(false);
                 });
         };
