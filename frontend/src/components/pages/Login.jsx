@@ -17,12 +17,12 @@ const Login = ({ setIsAuthenticated }) => {
         }
 
         if (username.length < 3 || username.length > 20) {
-            setMessage('O nome de usuário deve ter entre 3 e 20 caracteres.');
+            setMessage('erro');
             return;
         }
 
         if (password.length < 2) {
-            setMessage('A senha deve ter pelo menos 6 caracteres.');
+            setMessage('erro');
             return;
         }
         const sucess = await login( username, password );
@@ -30,7 +30,7 @@ const Login = ({ setIsAuthenticated }) => {
           setIsAuthenticated(true); //Chamar setIsAuthenticated após o login bem-sucedido
           navigate('/redirect');   
         }else {
-          setMessage("Erro ao se auth")
+          setMessage("Erro ao se autenticar, verifique seu usuário e senha.");
         }
  };
 
@@ -51,7 +51,7 @@ const Login = ({ setIsAuthenticated }) => {
             className="form-control"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            placeholder="Enter your username"
+            placeholder="entre com o usuário"
             required
           />
           </div>
@@ -73,7 +73,7 @@ const Login = ({ setIsAuthenticated }) => {
           />
           </div>
         </div>
-        <button type="submit" className="btn btn-primary w-100">Login</button>
+        <button type="submit" className="btn btn-primary w-100">Acessar</button>
         </form>
         {message && (
         <div className="alert alert-danger text-center mt-3" role="alert">

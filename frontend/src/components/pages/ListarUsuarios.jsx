@@ -48,9 +48,13 @@ const ListarUsuarios = () => {
         ) : (
             <div>
                 <div className="d-flex justify-content-between mb-3">
-                    <button className="btn btn-primary" >
-                        <i className="bi bi-database-fill-add"></i> Novo usuário
-                    </button>
+                
+                        <Link to="/admin/maneger/user/novo" className="nav-link text-white">
+                        <button className="btn btn-primary" >
+                        <i className="bi bi-database-fill-add"></i>
+                            Novo Usuário
+                            </button>
+                        </Link>
                 </div>
                 <TabelasListUser data={usuarios}></TabelasListUser>
             </div>
