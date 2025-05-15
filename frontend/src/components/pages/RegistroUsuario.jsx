@@ -6,15 +6,33 @@ const RegistroUsuario = () => {
         username: '',
         email: '',
         password: '',
+        confirmPassword: '',
+        role: ''
     });
+
+    const [passwordError, setPasswordError] = useState('');
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
+
+        if (name === 'confirmPassword' || name === 'password') {
+            if (name === 'confirmPassword' && formData.password !== value) {
+                setPasswordError('As senhas não coincidem!');
+            } else if (name === 'password' && formData.confirmPassword && formData.confirmPassword !== value) {
+                setPasswordError('As senhas não coincidem!');
+            } else {
+                setPasswordError('');
+            }
+        }
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        if (passwordError) {
+            alert('Corrija os erros antes de enviar o formulário.');
+            return;
+        }
         console.log('Form Data:', formData);
         // Aqui você pode adicionar a lógica para enviar os dados para o backend
     };
@@ -58,6 +76,34 @@ const RegistroUsuario = () => {
                         required
                         className="form-control"
                     />
+                </div>
+                <div className="mb-3">
+                    <label htmlFor="confirmPassword" className="form-label">Confirm Password:</label>
+                    <input
+                        type="password"
+                        id="confirmPassword"
+                        name="confirmPassword"
+                        value={formData.confirmPassword}
+                        onChange={handleChange}
+                        required
+                        className="form-control"
+                    />
+                    {passwordError && <small className="text-danger">{passwordError}</small>}
+                </div>
+                <div className="mb-3">
+                    <select
+                        id="role"
+                        name="role"
+                        value={formData.role}
+                        onChange={handleChange}
+                        required
+                        className="form-select mt-3"
+                    >
+                        <option value="">Selecione o papel</option>
+                        <option value="admin">Admin</option>
+                        <option value="user">Usuário</option>
+                        <option value="guest">Convidado</option>
+                    </select>
                 </div>
                 <button type="submit" className="btn btn-primary w-100">
                     Registrar

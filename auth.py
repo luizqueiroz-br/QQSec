@@ -56,46 +56,40 @@ def logout():
     session.clear()
     return jsonify({'message': 'logout sucess'}), 200
 
-@auth_bp.route('/register', methods=['GET', 'POST'])
+@auth_bp.route('/api/user/register', methods=['POST'])
 @login_required
 def register():
     if current_user.role != 'admin':
-        return render_template('acesso_negado.html')
-    if request.method == 'POST':
-        username = request.form['username']
-        email = request.form['email']
-        password = request.form['password']
-        confirm_password = request.form['confirm_password']
-        role = request.form.get('role', 'comum')
+        return jsonify({'message': 'Acesso negado'}), 403
 
-        # Validação de senha
-        if password != confirm_password:
-            flash('As senhas não coincidem!')
-            return redirect(url_for('auth.register'))
-        
-        if len(password) < 6:
-            flash('A senha deve ter pelo menos 6 caracteres!')
-            return redirect(url_for('auth.register'))
+    data = request.get_json()
+    username = data.get('username')
+    email = data.get('email')
+    password = data.get('password')
+    confirm_password = data.get('confirm_password')
+    role = data.get('role', 'comum')
 
-        user_existente = User.query.filter_by(username=username).first()
-        email_existente = User.query.filter_by(email=email).first()
-        if email_existente:
-            flash('Email já cadastrado!')
-            return redirect(url_for('auth.register'))
-        if user_existente:
-            flash('Usuário já existe!')
-            return redirect(url_for('auth.register'))
+    # Validação de senha
+    if password != confirm_password:
+        return jsonify({'message': 'As senhas não coincidem!'}), 400
 
-        novo_user = User(
-            username=username,
-            email=email,
-            password=generate_password_hash(password),
-            by=current_user.username,
-            role=role
-        )
-        db.session.add(novo_user)
-        db.session.commit()
-        flash('Usuário registrado com sucesso! Faça login.')
-        return redirect(url_for('auth.login'))
+    if len(password) < 6:
+        return jsonify({'message': 'A senha deve ter pelo menos 6 caracteres!'}), 400
 
-    return render_template('admin/registro.html')
+    user_existente = User.query.filter_by(username=username).first()
+    email_existente = User.query.filter_by(email=email).first()
+    if email_existente:
+        return jsonify({'message': 'Email já cadastrado!'}), 400
+    if user_existente:
+        return jsonify({'message': 'Usuário já existe!'}), 400
+
+    novo_user = User(
+        username=username,
+        email=email,
+        password=generate_password_hash(password),
+        by=current_user.username,
+        role=role
+    )
+    db.session.add(novo_user)
+    db.session.commit()
+    return jsonify({'message': 'Usuário registrado com sucesso!'}), 201
