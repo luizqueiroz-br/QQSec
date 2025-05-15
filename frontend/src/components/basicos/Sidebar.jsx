@@ -18,7 +18,17 @@ export default function Sidebar() {
         </li>
         <li>
           <Link to="/reports" className="nav-link text-white">
-            Reports
+          <i className="bi bi-file-earmark-text"></i>  SubDomainFinder 
+          </Link>
+        </li>
+        <li>
+          <Link to="/whois" className="nav-link text-white">
+          <i class="bi bi-info"></i>   Whois Information
+          </Link>
+        </li>
+        <li>
+          <Link to="/ConversorTime" className="nav-link text-white">
+          <i class="bi bi-clock-history"></i>  Conversor de time
           </Link>
         </li>
         <li>
