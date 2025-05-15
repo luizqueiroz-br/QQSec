@@ -1,9 +1,14 @@
 import { Link } from 'react-router-dom';
+import logo from '../../assets/logo.png';
+
 
 export default function Sidebar() {
   return (
-    <div id='sidbar' className="w-60 h-screen bg-slate-900 text-white p-4 fixed">
-      <h2 className="text-2xl font-bold mb-6">Acme</h2>
+    <div id='sidebar' className="w-60 h-screen bg-slate-500 text-white p-4 fixed">
+  
+        <img src={logo} alt="Logo" style={{ width: '150px', height: '150px' }} />
+
+        
       <nav className="flex flex-col gap-4">
       <ul className="nav nav-pills flex-column mb-auto">
         <li className="nav-item">

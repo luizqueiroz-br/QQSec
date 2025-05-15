@@ -8,7 +8,6 @@ export default function Topbar() {
   const handleLogout = async () => {
     const success = await logout();
     if (success) {
-      console.log('Logout bem-sucedido, navegando para /login');
       navigate('/login');
     } else {
       console.error('Erro ao fazer logout');
