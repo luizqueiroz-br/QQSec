@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Tabelas = ({ data, additionalColumns = [] }) => {
+const Tabelas = ({ data = [], additionalColumns = [] }) => {
     if (!data || data.length === 0) {
         return <p>Nenhum dado disponível.</p>;
     }
