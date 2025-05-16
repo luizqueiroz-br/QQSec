@@ -19,7 +19,7 @@ export default function Sidebar() {
             </Link>
           </li>
           <li>
-            <Link to="/reports" className="nav-link text-white">  
+            <Link to="/tools/dnsenum" className="nav-link text-white">  
               <i className="bi bi-file-earmark-text"></i>  DNS Enumeration (offline)
             </Link>
           </li>

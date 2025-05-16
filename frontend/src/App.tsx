@@ -8,6 +8,8 @@ import DashboardRedirect from './components/DashboardRedirect';
 import DashboardLayout from './components/layouts/DashboardLayout';
 import ListarUsuarios from './components/pages/ListarUsuarios';
 import RegistroUsuario from './components/pages/RegistroUsuario';
+import Dnsenum from './components/pages/DnsEnum';
+
 
 export default function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -34,6 +36,7 @@ export default function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/admin/maneger/user" element={<ListarUsuarios />} />
           <Route path="/admin/maneger/user/novo" element={<RegistroUsuario />} />
+          <Route path="/tools/dnsenum" element={<Dnsenum />} />
           <Route path="/redirect" element={<DashboardRedirect isAuthenticated={isAuthenticated} />} />
         </Route>
       </Route>
