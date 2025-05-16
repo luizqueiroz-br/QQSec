@@ -24,14 +24,38 @@ export default function Dnsenum() {
       });
   };
 
-  return (
-    <div>
-      <h2>DNSenum Scanner</h2>
-      <input value={domain} onChange={e => setDomain(e.target.value)} placeholder="exemplo.com" />
-      <button onClick={startScan}>Iniciar Scan</button>
-      {taskId && !result && <button onClick={fetchResult}>Ver Resultado</button>}
-      {result && <ResultCard data={result} />}
+return (
+    <div className="container mt-5">
+        <div className="card shadow">
+            <div className="card-header bg-dark text-white">
+                <h2 className="mb-0">DNSenum Scanner</h2>
+            </div>
+            <div className="card-body">
+                <div className="mb-3">
+                    <label htmlFor="domainInput" className="form-label">Digite o domínio:</label>
+                    <input
+                        id="domainInput"
+                        type="text"
+                        className="form-control"
+                        value={domain}
+                        onChange={e => setDomain(e.target.value)}
+                        placeholder="exemplo.com"
+                    />
+                </div>
+                <div className="d-flex justify-content-between">
+                    <button className="btn btn-success" onClick={startScan}>Iniciar Scan</button>
+                    {taskId && !result && (
+                        <button className="btn btn-warning" onClick={fetchResult}>Ver Resultado</button>
+                    )}
+                </div>
+                {result && (
+                    <div className="mt-4">
+                        <ResultCard data={result} />
+                    </div>
+                )}
+            </div>
+        </div>
     </div>
-  );
+);
 }
 
