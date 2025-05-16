@@ -14,7 +14,7 @@ export default function Sidebar() {
             </Link>
           </li>
           <li>
-            <Link to="/reports" className="nav-link text-white">
+            <Link to="/tools/subdomainfinder" className="nav-link text-white">
               <i className="bi bi-file-earmark-text"></i>  SubDomainFinder (offline)
             </Link>
           </li>
